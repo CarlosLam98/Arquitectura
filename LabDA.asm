@@ -25,9 +25,10 @@ _inicio
 	; 9Fh ADCON1 ADFM ADCS2 ? ? PCFG3 PCFG2 PCFG1 PCFG0
 	bsf TRISA,0 ;RA0 linea de entrada para el ADC
 	clrf TRISB
-	clrf TRISD
+	bcf TRISD, 7
+	bcf TRISD, 6
+	bsf TRISD, 5
 	clrf TRISC
-	bsf TRISA, 1
     	bcf STATUS,RP0 ;Ir banco 0
 	bcf STATUS,RP1
 	clrf PORTB ;Limpiar PORTB
@@ -64,7 +65,7 @@ _Recorrido
 	MOVWF PORTB
 	call _delay
 	BCF PORTD, 6
-	btfss PORTA, 1
+	btfss PORTD, 5
 	goto _Recorrido
 	goto _bucle
 _delay
