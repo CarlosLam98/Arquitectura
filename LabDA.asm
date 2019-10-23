@@ -34,7 +34,8 @@ _inicio
 	clrf PORTB ;Limpiar PORTB
 
 _Recorrido
-	BSF PORTD, 7
+	BSF PORTD, 6
+	BCF PORTD, 7
  	MOVLW 0X00
  	MOVWF PORTB 	
 	call _delay
@@ -50,8 +51,8 @@ _Recorrido
 	MOVLW 0X08
 	MOVWF PORTB
 	call _delay
-	BCF PORTD, 7
-	BSF PORTD, 6
+	BSF PORTD, 7
+	BCF PORTD, 6
 	MOVLW 0X08
 	MOVWF PORTB
 	call _delay
@@ -64,7 +65,7 @@ _Recorrido
 	MOVLW 0X01
 	MOVWF PORTB
 	call _delay
-	BCF PORTD, 6
+	BSF PORTD, 6
 	btfss PORTD, 5
 	goto _Recorrido
 	goto _bucle
@@ -103,14 +104,14 @@ _espera
 	goto _esOtro
 
 _esL
-	bcf PORTD, 6
-	bsf PORTD, 7
+	bsf PORTD, 6
+	bcf PORTD, 7
 	movlw 0x01
 	movwf FLG
 	goto _bucle
 _esH
-	bcf PORTD, 7
-	bsf PORTD, 6
+	bsf PORTD, 7
+	bcf PORTD, 6
 	movfw FLG
 	sublw 0x01
 	btfsc status, 2
@@ -120,7 +121,6 @@ _esH
 _auxi
 	movlw 0x02
 	movwf FLG
-	bsf PORTD, 0
 	incf CON,1
 	goto _bucle
 _esOtro
@@ -132,7 +132,6 @@ _esOtro
 _apagar
 	movlw 0x00
 	movwf FLG
-	bcf PORTD, 0
 	goto _bucle
 
 _tablas
